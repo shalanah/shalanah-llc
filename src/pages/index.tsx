@@ -1,5 +1,6 @@
 import * as React from "react";
 import type { HeadFC } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
 import styled, { createGlobalStyle } from "styled-components";
 
 // Using Gatsby - although it is overkill for now - to allow easy routing and possible blog in the future
@@ -14,34 +15,63 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+  a, .link {
+    color: inherit;
+    position: relative;
+    transition: .15s;
+    text-decoration: none;
+    :after {
+      content: "";
+      transition: .15s;
+      position: absolute;
+      background-color: currentColor;
+      width: 100%;
+      bottom: -.025em;
+      left: 0;
+      height: 2px;
+    }
+    :hover:after{
+      bottom: calc(-.025em - 5px);
+      height: 5px;
+    }
+  }
   body {
+    line-height: 1;
     font-size: 1.2rem;
     background: #222;
     color: #fff;
-    font-family: sans-serif;
+    font-family: Charis SIL, sans-serif;
+    @media (max-width: 900px) {
+      font-size: 1.1rem;
+    }
   }
   h1, h2, h3, h4, h5, h6 {
     margin-left: .2em;
     font-family: Homemade Apple, sans-serif;
     @media (max-width: 900px) {
-      margin-left: .3em;
+      margin-left: .1em;
     }
   }
   h1 {font-size: 2.5rem;}
   h2 {
     font-size: 2.5rem;
-    margin-bottom: .5rem;
+    margin-bottom: .25em;
+    @media (max-width: 900px) {
+      margin-top: .5em;
+      font-size: 2rem;
+    }
   }
   p {
     line-height: 1.4;
     margin-bottom: 1rem;
+    :last-child { margin-bottom: 0; }
   }
 `;
 
 const Container = styled.div`
   display: flex;
   gap: 2rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 2.5rem;
   @media (max-width: 900px) {
     display: block;
   }
@@ -52,7 +82,7 @@ const First = styled.div`
     aspect-ratio: 2;
     width: 100%;
     border-radius: 30px;
-    background: blue;
+    box-shadow: -5px 5px 0 0px #2f2f2f;
   }
   @media (max-width: 900px) {
     width: 100%;
@@ -60,6 +90,7 @@ const First = styled.div`
   }
 `;
 const Second = styled.div`
+  position: relative;
   flex: 1;
   display: flex;
   width: 100%;
@@ -72,30 +103,52 @@ const Second = styled.div`
   }
 `;
 
-const H1 = styled.h1`
-  margin-top: max(2rem, 4vh);
+const Main = styled.main`
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
   @media (max-width: 900px) {
-    margin-top: 0px;
+    padding: 1.5rem;
   }
 `;
 
 // TODO: Make a layout style?
 // TODO: SEO info
+// TODO: Icons
+
+const staticImageProps = {
+  aspectRatio: 2,
+  className: "img",
+};
 
 const apps = [
   {
     name: "Spiral Betty",
     launched: "2018",
-    description: "Spiralize your photos",
-    url: "https://spiralbetty.com",
+    description: "Spiralize your photo and download as jpg, png, or svg.",
+    url: "spiralbetty.com",
     playstore: "",
+    img: (
+      <StaticImage
+        {...staticImageProps}
+        src="../images/spiral-betty-shalanah-llc.png"
+        alt="A 1950s woman as a 1 line spiral"
+      />
+    ),
   },
   {
     name: "Kind Cloud",
     launched: "2020",
     description: "A sound-free loving-kindness meditation app",
-    url: "https://kindcloud.app",
+    url: "kindcloud.app",
     playstore: "",
+    img: (
+      <StaticImage
+        {...staticImageProps}
+        src="../images/kind-cloud-app-shalanah-llc.png"
+        alt="A happy cloud"
+      />
+    ),
   },
 ];
 
@@ -106,33 +159,18 @@ const IndexPage = () => {
   return (
     <>
       <GlobalStyles />
-      <main
-        style={{
-          padding: "2rem",
-          maxWidth: "1400px",
-          margin: "0 auto",
-        }}
-      >
-        <H1>
-          Shalanah
-          <span style={{ fontSize: ".6em", fontFamily: "sans-serif" }}>
-            {" "}
-            LLC
-          </span>
-        </H1>
-        {apps.map(({ name, description, launched, url }) => {
+      <Main>
+        {apps.map(({ name, description, url, img }) => {
           return (
             <Container as="article">
-              <First>
-                <div className="img" />
-              </First>
+              <First>{img}</First>
               <Second>
                 <div>
                   <h2 translate="no">{name}</h2>
-                  <p className="launched">Launched {launched}</p>
-                  <p className="description">{description}</p>
-                  <p className="link">
-                    <a href={url}>Link</a>
+                  {/* <p className="launched">Launched {launched}</p> */}
+                  <p>{description}</p>
+                  <p>
+                    <a href={`https://${url}`}>{url} →</a>
                   </p>
                 </div>
               </Second>
@@ -141,7 +179,11 @@ const IndexPage = () => {
         })}
         <Container as="section">
           <First>
-            <div className="img" />
+            <StaticImage
+              {...staticImageProps}
+              src="../images/PXL_20220807_202743452.jpg"
+              alt="Up close view of compiled html for spiralbetty.com"
+            />
           </First>
           <Second>
             <div>
@@ -150,7 +192,7 @@ const IndexPage = () => {
                 Shalanah Dawson created Shalanah LLC in 2021 after{" "}
                 <span translate="no">Spiral Betty</span> became a viral hit
                 among coloring book enthusiasts, Cricut/Silhouette cutting
-                machine users, and as mobile iPhone lock screens.
+                machine users, and mobile iPhone users for lock screens.
               </p>
               <p>
                 Shalanah continues to work on{" "}
@@ -160,20 +202,17 @@ const IndexPage = () => {
               </p>
               <p>
                 For inquiries email{" "}
-                <span
-                  style={{
-                    textDecoration: "underline",
-                    textUnderlineOffset: ".2em",
-                  }}
-                >
+                <span className="link" style={{ pointerEvents: "none" }}>
                   {first}&#64;{last}
-                </span>
+                </span>{" "}
+                or follow on{" "}
+                <a href="https://www.linkedin.com/company/80629889">Linkedin</a>
               </p>
             </div>
           </Second>
         </Container>
         <footer style={{ padding: "2rem 0 0" }}>Shalanah LLC ©2022</footer>
-      </main>
+      </Main>
     </>
   );
 };

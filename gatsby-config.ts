@@ -34,7 +34,7 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [`Homemade Apple`],
+        fonts: [`Homemade Apple`, `Charis SIL`],
         display: "swap",
       },
     },
