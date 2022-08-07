@@ -21,8 +21,11 @@ const GlobalStyles = createGlobalStyle`
     font-family: sans-serif;
   }
   h1, h2, h3, h4, h5, h6 {
-    margin-left: .3em;
+    margin-left: .2em;
     font-family: Homemade Apple, sans-serif;
+    @media (max-width: 900px) {
+      margin-left: .3em;
+    }
   }
   h1 {font-size: 2.5rem;}
   h2 {
@@ -65,7 +68,7 @@ const Second = styled.div`
     margin: auto;
   }
   @media (max-width: 900px) {
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
   }
 `;
 
