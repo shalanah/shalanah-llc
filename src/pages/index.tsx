@@ -21,6 +21,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: sans-serif;
   }
   h1, h2, h3, h4, h5, h6 {
+    margin-left: .3em;
     font-family: Homemade Apple, sans-serif;
   }
   h1 {font-size: 2.5rem;}
@@ -37,7 +38,10 @@ const GlobalStyles = createGlobalStyle`
 const Container = styled.div`
   display: flex;
   gap: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  @media (max-width: 900px) {
+    display: block;
+  }
 `;
 const First = styled.div`
   width: min(700px, 50vw);
@@ -47,6 +51,10 @@ const First = styled.div`
     border-radius: 30px;
     background: blue;
   }
+  @media (max-width: 900px) {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
 `;
 const Second = styled.div`
   flex: 1;
@@ -55,6 +63,16 @@ const Second = styled.div`
   > div {
     width: 100%;
     margin: auto;
+  }
+  @media (max-width: 900px) {
+    margin-bottom: 5rem;
+  }
+`;
+
+const H1 = styled.h1`
+  margin-top: max(2rem, 4vh);
+  @media (max-width: 900px) {
+    margin-top: 0px;
   }
 `;
 
@@ -87,17 +105,18 @@ const IndexPage = () => {
       <GlobalStyles />
       <main
         style={{
+          padding: "2rem",
           maxWidth: "1400px",
-          margin: "max(2rem, 4vh) auto 2rem",
+          margin: "0 auto",
         }}
       >
-        <h1>
+        <H1>
           Shalanah
           <span style={{ fontSize: ".6em", fontFamily: "sans-serif" }}>
             {" "}
             LLC
           </span>
-        </h1>
+        </H1>
         {apps.map(({ name, description, launched, url }) => {
           return (
             <Container as="article">
@@ -137,12 +156,20 @@ const IndexPage = () => {
                 projects.
               </p>
               <p>
-                For inquiries, please email {first}&commat;{last}
+                For inquiries email{" "}
+                <span
+                  style={{
+                    textDecoration: "underline",
+                    textUnderlineOffset: ".2em",
+                  }}
+                >
+                  {first}&#64;{last}
+                </span>
               </p>
             </div>
           </Second>
         </Container>
-        <footer style={{ padding: "2rem 0" }}>Shalanah LLC ©2022</footer>
+        <footer style={{ padding: "2rem 0 0" }}>Shalanah LLC ©2022</footer>
       </main>
     </>
   );
