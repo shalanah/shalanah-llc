@@ -115,8 +115,8 @@ const IndexPage = () => {
           <p>
             Shalanah Dawson created Shalanah LLC in 2021 after{" "}
             <span translate="no">Spiral Betty</span> became a viral hit among
-            coloring book enthusiasts, Cricut/Silhoutte cutting machine users,
-            and as mobile iPhone lockscreens.
+            coloring book enthusiasts, Cricut/Silhouette cutting machine users,
+            and as mobile iPhone lock screens.
           </p>
           <p>
             Shalanah continues to work on{" "}
