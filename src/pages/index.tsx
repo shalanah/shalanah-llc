@@ -21,44 +21,45 @@ const GlobalStyles = createGlobalStyle`
     font-family: sans-serif;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: vampiro one, sans-serif;
+    font-family: Homemade Apple, sans-serif;
   }
+  h1 {font-size: 2.5rem;}
   h2 {
     font-size: 2.5rem;
+    margin-bottom: .5rem;
+  }
+  p {
+    line-height: 1.4;
+    margin-bottom: 1rem;
   }
 `;
 
-// TODO: Make a layout style?
-// TODO: SEO info
-
-const AppArticle = styled.article`
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: min(700px, 50vw) auto;
+const Container = styled.div`
+  display: flex;
+  gap: 2rem;
   margin-bottom: 1rem;
-  gap: 1rem;
-  h2 {
-    margin-bottom: 0.5rem;
-  }
+`;
+const First = styled.div`
+  width: min(700px, 50vw);
   .img {
     aspect-ratio: 2;
     width: 100%;
     border-radius: 30px;
     background: blue;
   }
-  .text {
-    display: flex;
-    flex-direction: column;
-    > div {
-      width: 100%;
-      margin: auto;
-    }
-  }
-  grid-template-areas: "img   text";
 `;
-const Section = styled.section``;
-const Footer = styled.footer``;
-const Header = styled.header``;
+const Second = styled.div`
+  flex: 1;
+  display: flex;
+  width: 100%;
+  > div {
+    width: 100%;
+    margin: auto;
+  }
+`;
+
+// TODO: Make a layout style?
+// TODO: SEO info
 
 const apps = [
   {
@@ -77,27 +78,33 @@ const apps = [
   },
 ];
 
+const first = "info";
+const last = "shalanah.llc";
+
 const IndexPage = () => {
   return (
     <>
       <GlobalStyles />
       <main
         style={{
-          padding: "20px",
           maxWidth: "1400px",
-          margin: "max(2rem, 4vh) auto",
+          margin: "max(2rem, 4vh) auto 2rem",
         }}
       >
-        <Header>
-          <h1 style={{ fontSize: "2vw" }}>
-            Shalanah<span style={{ fontSize: ".6em" }}> LLC</span>
-          </h1>
-        </Header>
+        <h1>
+          Shalanah
+          <span style={{ fontSize: ".6em", fontFamily: "sans-serif" }}>
+            {" "}
+            LLC
+          </span>
+        </h1>
         {apps.map(({ name, description, launched, url }) => {
           return (
-            <AppArticle>
-              <div className="img" style={{ gridArea: "img" }} />
-              <div className="text" style={{ gridArea: "text" }}>
+            <Container as="article">
+              <First>
+                <div className="img" />
+              </First>
+              <Second>
                 <div>
                   <h2 translate="no">{name}</h2>
                   <p className="launched">Launched {launched}</p>
@@ -106,26 +113,36 @@ const IndexPage = () => {
                     <a href={url}>Link</a>
                   </p>
                 </div>
-              </div>
-            </AppArticle>
+              </Second>
+            </Container>
           );
         })}
-        <Section>
-          <h2>About</h2>
-          <p>
-            Shalanah Dawson created Shalanah LLC in 2021 after{" "}
-            <span translate="no">Spiral Betty</span> became a viral hit among
-            coloring book enthusiasts, Cricut/Silhouette cutting machine users,
-            and as mobile iPhone lock screens.
-          </p>
-          <p>
-            Shalanah continues to work on{" "}
-            <span translate="no">Spiral Betty</span>,{" "}
-            <span translate="no">Kind Cloud</span>, and other web app projects.
-          </p>
-          <p>For inquiries, please email ...</p>
-        </Section>
-        <Footer>Shalanah LLC 2022</Footer>
+        <Container as="section">
+          <First>
+            <div className="img" />
+          </First>
+          <Second>
+            <div>
+              <h2>About</h2>
+              <p>
+                Shalanah Dawson created Shalanah LLC in 2021 after{" "}
+                <span translate="no">Spiral Betty</span> became a viral hit
+                among coloring book enthusiasts, Cricut/Silhouette cutting
+                machine users, and as mobile iPhone lock screens.
+              </p>
+              <p>
+                Shalanah continues to work on{" "}
+                <span translate="no">Spiral Betty</span>,{" "}
+                <span translate="no">Kind Cloud</span>, and other web app
+                projects.
+              </p>
+              <p>
+                For inquiries, please email {first}&commat;{last}
+              </p>
+            </div>
+          </Second>
+        </Container>
+        <footer style={{ padding: "2rem 0" }}>Shalanah LLC ©2022</footer>
       </main>
     </>
   );
