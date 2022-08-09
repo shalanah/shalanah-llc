@@ -125,7 +125,7 @@ const apps = [
   {
     name: "Spiral Betty",
     launched: "2018",
-    description: "Spiralize your photos and download as jpg, png, or svgs.",
+    description: "Spiralize your photos and download as jpgs, pngs, or svgs.",
     url: "spiralbetty.com",
     playstore: "",
     img: (
