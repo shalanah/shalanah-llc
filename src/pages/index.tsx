@@ -125,7 +125,7 @@ const apps = [
   {
     name: "Spiral Betty",
     launched: "2018",
-    description: "Spiralize your photo and download as jpg, png, or svg.",
+    description: "Spiralize your photos and download as jpg, png, or svgs.",
     url: "spiralbetty.com",
     playstore: "",
     img: (
@@ -151,9 +151,6 @@ const apps = [
     ),
   },
 ];
-
-const first = "info";
-const last = "shalanah.llc";
 
 const IndexPage = () => {
   return (
@@ -191,7 +188,7 @@ const IndexPage = () => {
               <p>
                 Shalanah Dawson created Shalanah LLC in 2021 after{" "}
                 <span translate="no">Spiral Betty</span> became a viral hit
-                among coloring book enthusiasts, Cricut/Silhouette cutting
+                amongst coloring book enthusiasts, Cricut/Silhouette cutting
                 machine users, and mobile iPhone users for lock screens.
               </p>
               <p>
@@ -203,7 +200,8 @@ const IndexPage = () => {
               <p>
                 For inquiries email{" "}
                 <span className="link" style={{ pointerEvents: "none" }}>
-                  {first}&#64;{last}
+                  {/* Trying to have avoid spam by obscuring email a little bit */}
+                  <span>info</span>&#64;<span>shalanah.llc</span>
                 </span>{" "}
                 or follow on{" "}
                 <a href="https://www.linkedin.com/company/80629889">Linkedin</a>
