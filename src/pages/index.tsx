@@ -79,11 +79,16 @@ const Section = styled.section`
 `;
 const ImgContainer = styled.div`
   width: min(700px, 50vw);
+  border-radius: 30px;
+  box-shadow: -5px 5px 0 0px #2f2f2f;
+  * {
+    /* For Gatsby Image + Safari Issues */
+    border-radius: 30px;
+    overflow: hidden;
+  }
   .img {
     aspect-ratio: 2;
     width: 100%;
-    border-radius: 30px;
-    box-shadow: -5px 5px 0 0px #2f2f2f;
   }
   @media (${BP}) {
     width: 100%;
