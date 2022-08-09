@@ -4,7 +4,9 @@ import { Script } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import styled, { createGlobalStyle } from "styled-components";
 
-// Using Gatsby - although it is overkill for now - to allow easy routing and possible blog in the future
+// Using Gatsby to allow easy routing and possible blog in the future
+
+const BP = "max-width: 900px"; // Breakpoint
 
 const GlobalStyles = createGlobalStyle`
   body, html, #___gatsby {
@@ -42,22 +44,21 @@ const GlobalStyles = createGlobalStyle`
     background: #222;
     color: #fff;
     font-family: Charis SIL, sans-serif;
-    @media (max-width: 900px) {
+    @media (${BP}) {
       font-size: 1.1rem;
     }
   }
   h1, h2, h3, h4, h5, h6 {
     margin-left: .2em;
     font-family: Homemade Apple, sans-serif;
-    @media (max-width: 900px) {
+    @media (${BP}) {
       margin-left: .1em;
     }
   }
-  h1 {font-size: 2.5rem;}
   h2 {
     font-size: 2.5rem;
     margin-bottom: .25em;
-    @media (max-width: 900px) {
+    @media (${BP}) {
       margin-top: .5em;
       font-size: 2rem;
     }
@@ -68,16 +69,15 @@ const GlobalStyles = createGlobalStyle`
     :last-child { margin-bottom: 0; }
   }
 `;
-
-const Container = styled.div`
+const Section = styled.section`
   display: flex;
   gap: 2rem;
   margin-bottom: 2.5rem;
-  @media (max-width: 900px) {
+  @media (${BP}) {
     display: block;
   }
 `;
-const First = styled.div`
+const ImgContainer = styled.div`
   width: min(700px, 50vw);
   .img {
     aspect-ratio: 2;
@@ -85,12 +85,12 @@ const First = styled.div`
     border-radius: 30px;
     box-shadow: -5px 5px 0 0px #2f2f2f;
   }
-  @media (max-width: 900px) {
+  @media (${BP}) {
     width: 100%;
     margin-bottom: 0.5rem;
   }
 `;
-const Second = styled.div`
+const TextContainer = styled.div`
   position: relative;
   flex: 1;
   display: flex;
@@ -99,16 +99,15 @@ const Second = styled.div`
     width: 100%;
     margin: auto;
   }
-  @media (max-width: 900px) {
+  @media (${BP}) {
     margin-bottom: 3rem;
   }
 `;
-
 const Main = styled.main`
   padding: 2rem;
   max-width: 1400px;
   margin: 0 auto;
-  @media (max-width: 900px) {
+  @media (${BP}) {
     padding: 1.5rem;
   }
 `;
@@ -121,7 +120,6 @@ const staticImageProps = {
   aspectRatio: 2,
   className: "img",
 };
-
 const apps = [
   {
     name: "Spiral Betty",
@@ -160,9 +158,9 @@ const IndexPage = () => {
       <Main>
         {apps.map(({ name, description, url, img }) => {
           return (
-            <Container as="article">
-              <First>{img}</First>
-              <Second>
+            <Section>
+              <ImgContainer>{img}</ImgContainer>
+              <TextContainer>
                 <div>
                   <h2 translate="no">{name}</h2>
                   {/* <p className="launched">Launched {launched}</p> */}
@@ -171,19 +169,19 @@ const IndexPage = () => {
                     <a href={`https://${url}`}>{url} →</a>
                   </p>
                 </div>
-              </Second>
-            </Container>
+              </TextContainer>
+            </Section>
           );
         })}
-        <Container as="section">
-          <First>
+        <Section>
+          <ImgContainer>
             <StaticImage
               {...staticImageProps}
               src="../images/PXL_20220807_202743452.jpg"
               alt="Up close view of compiled html for spiralbetty.com"
             />
-          </First>
-          <Second>
+          </ImgContainer>
+          <TextContainer>
             <div>
               <h2>About</h2>
               <p>
@@ -208,8 +206,8 @@ const IndexPage = () => {
                 <a href="https://www.linkedin.com/company/80629889">Linkedin</a>
               </p>
             </div>
-          </Second>
-        </Container>
+          </TextContainer>
+        </Section>
         <footer style={{ padding: "2rem 0 0" }}>Shalanah LLC ©2022</footer>
         {/* TODO: Add to a layout component if mult pages */}
         <Script>{`var sc_project=12781896;var sc_invisible=1;var sc_security="0776efae";`}</Script>
