@@ -199,7 +199,7 @@ const IndexPage = () => {
               <p>
                 For inquiries email{" "}
                 <span className="link" style={{ pointerEvents: "none" }}>
-                  {/* Trying to have avoid spam by obscuring email a little bit */}
+                  {/* Avoid spam by obscuring email a little bit */}
                   <span>info</span>&#64;<span>shalanah.llc</span>
                 </span>{" "}
                 or follow on{" "}
