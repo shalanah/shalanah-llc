@@ -212,7 +212,7 @@ const IndexPage = () => {
         </Container>
         <footer style={{ padding: "2rem 0 0" }}>Shalanah LLC ©2022</footer>
         {/* TODO: Add to a layout component if mult pages */}
-        <Script>{`var sc_project=12781896;var sc_invisible=1;var sc_security="0776efae"; `}</Script>
+        <Script>{`var sc_project=12781896;var sc_invisible=1;var sc_security="0776efae";`}</Script>
         <Script src="https://www.statcounter.com/counter/counter.js" async />
       </Main>
     </>
