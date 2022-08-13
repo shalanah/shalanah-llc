@@ -163,7 +163,7 @@ const IndexPage = () => {
       <Main>
         {apps.map(({ name, description, url, img }) => {
           return (
-            <Section>
+            <Section key={name}>
               <ImgContainer>{img}</ImgContainer>
               <TextContainer>
                 <div>
